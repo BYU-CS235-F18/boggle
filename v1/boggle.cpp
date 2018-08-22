@@ -64,6 +64,8 @@ bool Boggle::importBoard(string file_name)
       cout << "line read fail" << endl;
       return false;
     }
+    while(line[line.size()-1] == ' ' || line[line.size()-1] == '\n' || line[line.size()-1] == '\r')
+      line = line.substr(0, line.size()-1);
     if(line.size() != SIZE*2-1)
     {
       cout << "line wrong size: actual " << line.size() << ", expected: " << SIZE*2-1 << endl;
@@ -99,7 +101,8 @@ bool Boggle::importDictionary(string file_name)
 
   while(getline(ifs, line))
   {
-    line = line.substr(0, line.size()-1);
+    while(line[line.size()-1] == ' ' || line[line.size()-1] == '\n' || line[line.size()-1] == '\r')
+      line = line.substr(0, line.size()-1);
     transform(line.begin(), line.end(), line.begin(), ::tolower);
     dictionary.push_back(line);
   }
